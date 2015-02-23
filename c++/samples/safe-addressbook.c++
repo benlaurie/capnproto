@@ -268,7 +268,12 @@ int main(int argc, char* argv[]) {
   } else if (strcmp(argv[1], "write") == 0) {
     writeAddressBook(1);
   } else if (strcmp(argv[1], "read") == 0) {
-    printAddressBook(0);
+    try {
+      printAddressBook(0);
+    } catch (const std::exception &e) {
+      std::cerr << "BANG: " << e.what() << std::endl;
+      return 1;
+    }
   } else if (strcmp(argv[1], "dwrite") == 0) {
     dynamicWriteAddressBook(1, schema);
   } else if (strcmp(argv[1], "dread") == 0) {
